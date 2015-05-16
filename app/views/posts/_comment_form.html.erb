@@ -1,0 +1,12 @@
+<%= form_for [@post, @post.comments.build] do |f| %>
+  <div class="row collapse">
+    <div class="small-3 columns">
+        <%= f.label :content, class: "right inline" %>
+    </div>
+    <div class="small-9 columns"><%= f.text_area :content %></div>
+  </div>
+  <%= f.hidden_field :commentable_type , :value => "Post" %>
+  <div class="small-9 small-offset-3 columns">
+    <%= f.submit %>
+  </div>
+<% end %>
