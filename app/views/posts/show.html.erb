@@ -9,6 +9,20 @@
   <strong>Content:</strong>
   <%= @post.content %>
 </p>
+<br \>
+
+<div class="containter">
+  <% @post.comments.each do |comment| %>
+    <h3>Comment # <%= "#{@post.comments.index(comment) + 1}" %></h3>
+    <p><%= comment.content %><p>
+    <br \>
+    <p><%= link_to 'Edit', edit_post_comment_path(@post, comment) %></p>
+    <p><%= link_to 'Destroy', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+</div>
+
+<%= render 'comment_form' %>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+<%= link_to 'Delete', post_path, method: :delete, data: { confirm: 'Are you sure?'} %>

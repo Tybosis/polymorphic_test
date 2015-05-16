@@ -1,14 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @video.title %>
-</p>
+<div class="container">
+  <div class="containter">
+    <iframe width="560" height="315" src=<%= "https://www.youtube.com/embed/#{@video.url}" %> frameborder="0" allowfullscreen></iframe>
+    <h1><%= @video.title %></h1>
+  </div>
+  <br \>
+  <div class="containter">
+  <h3>Comments</h3>
+    <% @video.comments.each do |comment| %>
+      <h3>Comment # <%= "#{@video.comments.index(comment) + 1}" %></h3>
+      <p><%= comment.content %></p>
+      <br \>
+      <p><%= link_to 'Edit', edit_video_comment_path(@video, comment) %></p>
+      <p><%= link_to 'Destroy', video_comment_path(@video, comment), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <% end %>
+  </div>
+</div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @video.url %>
-</p>
+<%= render 'comment_form' %>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>
+<%= link_to 'Delete', video_path, method: :delete, data: { confirm: 'Are you sure?'} %>
